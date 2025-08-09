@@ -1,105 +1,117 @@
-*{
-    padding: 0;
-    margin: 0;
-    font-family: sans-serif;
+body {
+  background-color: #f0f2f5; /* لون خلفية هادئ */
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; /* خط حديث */
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 50px;
+  height: 100vh;
 }
-body{
-    background-color: #66d6d6;
-    display: flex;
-    height: 100vh;
-    justify-content: space-between;
-}
+
 .notes {
-    display: flex;
-    flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+  padding: 20px;
+  width: 100%;
+  max-width: 1200px;
 }
-.note{
-    width: 300px;
-    height: 320px;
-    margin: 20px;
+
+.note {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  min-height: 250px;
 }
-.tool-bar{
-    width: 100%;
-    background-color:limegreen;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    padding: 0 5px;
-  
+
+.note:hover {
+  transform: translateY(-5px); /* تأثير عند مرور الفأرة */
 }
-.edit{
-    width: 10px;
-    height: 10px;
-    border-radius: 2px;
-    border: 2px solid #fff;
-    position: relative;
-    margin: 5px;
-    cursor: pointer;
+
+.tool-bar {
+  background-color: #f9f9f9;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  display: flex;
+  justify-content: flex-end;
+  padding: 8px;
+  gap: 10px;
 }
-.edit::before{
-    content: '';
-    position: absolute;
-    background: #fff;
-    width: 2px;
-    height: 15px;
-    rotate: 45deg;
-    bottom:0;
-    right: 0;
+
+.tool-bar div {
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0.6;
+  transition: opacity 0.2s;
 }
-.x{
-    width: 2px;
-    height: 15px;
-    background-color: #fff;
-    rotate: 45deg;
-    position: relative;
-    margin:0 10px;
-    cursor: pointer;
-  
+
+.tool-bar div:hover {
+  opacity: 1;
 }
-.x::before{
-    content: '';
-    position: absolute;
-    width: 2px;
-    height: 15px;
-    background-color: #fff;
-    rotate: 90deg;
+
+/* استخدام صور SVG للأيقونات بدلاً من الأشكال الهندسية */
+.edit {
+  background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>');
 }
-textarea{
-    min-width: 99.2%;
-    max-width:99.2% ;
-    min-height: 320px;
-    max-height: 320px;
-    padding: 5px;
-    font-size: 18px;
-    outline: none;
-    border: none;
-    box-shadow: 1px 1px 5px #838181;
+
+.x {
+  background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>');
 }
-.plus-sign{
-    width: 2px;
-    height: 10px;
-    background-color: #fff;
-    position: relative;
-    margin:0 10px;
-    
+
+textarea {
+  border: none;
+  padding: 15px;
+  font-size: 16px;
+  color: #333;
+  resize: none;
+  outline: none;
+  flex-grow: 1;
+  background-color: transparent;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
 }
-.plus-sign::before{
-    content: '';
-    position: absolute;
-    width: 2px;
-    height: 10px;
-    background-color: #fff;
-    rotate: 90deg;
+
+.add-note {
+  background-color: #007bff; /* لون أزرق جذاب */
+  color: #fff;
+  border-radius: 50px;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s, background-color 0.2s;
+  font-size: 24px;
 }
-.add-note{
-    display: flex;
-    align-items: center;
-    color: #fff;
-    background-color: limegreen;
-    height: 20px;
-    padding: 2px;
-    cursor: pointer;
-    margin: 10px;
-    min-width: 90px;
-    box-shadow:.5px .5px 2px #838181 ;
+
+.add-note:hover {
+  background-color: #0056b3;
+  transform: scale(1.1);
+}
+
+.plus-sign {
+  display: none; /* إزالة الرمز القديم واستخدام نص '+' أو أيقونة */
+}
+
+.add-note p {
+  display: none; /* إخفاء النص */
+}
+
+.add-note::after {
+  content: "+";
+}
+
+.read-only {
+  background-color: #f9f9f9;
 }
